@@ -1,0 +1,125 @@
+{
+  "novios": "Vanessa & Emilio",
+  "fechaBoda": "2027-07-17",
+  "horaInicio": "11:30",
+  "horaFin": "18:00",
+  "fechaLimiteRSVP": "2027-05-31",
+  "fotografia": {
+    "archivo": "",
+    "descripcion": "Vanessa y Emilio",
+    "encuadre": "50% 45%"
+  },
+  "musica": {
+    "archivo": "assets/musica/romantica.wav",
+    "volumen": 0.28,
+    "activar": "Activar música",
+    "silenciar": "Silenciar música",
+    "error": "No se pudo reproducir la música. Puedes intentar activarla de nuevo."
+  },
+  "colores": {
+    "verde": "#203A32",
+    "vino": "#722F37",
+    "madera": "#765440",
+    "marfil": "#F7F3EB",
+    "crema": "#EDE6DA"
+  },
+  "portada": {
+    "boton": "Abrir invitación"
+  },
+  "bienvenida": {
+    "titulo": "¡Nos casamos!",
+    "parrafos": [
+      "Hay momentos que se vuelven aún más especiales cuando los compartimos con las personas que amamos.",
+      "Nos encantaría que nos acompañaras a celebrar el comienzo de esta nueva etapa de nuestras vidas."
+    ]
+  },
+  "fecha": {
+    "tituloCuenta": "Cuenta regresiva para nuestro gran día",
+    "unidades": ["Días", "Horas", "Minutos", "Segundos"],
+    "final": "¡Llegó nuestro gran día!",
+    "notaCalendario": "Un día especial que esperamos compartir contigo.",
+    "notaHorario": "{horaInicio} – {horaFin} | Hora de Ecuador"
+  },
+  "ubicacion": {
+    "titulo": "Te esperamos en",
+    "nombre": "Quinta La Victoria",
+    "pais": "Ecuador",
+    "enlace": "https://maps.app.goo.gl/vtBazL1dYcwwEguR9?g_st=ic",
+    "boton": "Cómo llegar"
+  },
+  "cronograma": {
+    "titulo": "Cronograma del día",
+    "momentos": [
+      {
+        "hora": "10:30",
+        "titulo": "Fotografías con los novios",
+        "parrafos": [
+          "Si deseas tomarte fotografías con nosotros, te pedimos que llegues al lugar a las 10:30 de la mañana.",
+          "Nos encantará compartir este recuerdo contigo."
+        ]
+      },
+      {
+        "hora": "11:30",
+        "titulo": "Inicio de la celebración",
+        "parrafos": ["Comenzaremos a compartir juntos este día tan especial."]
+      },
+      {
+        "hora": "18:00",
+        "titulo": "Finalización de la celebración",
+        "parrafos": ["Gracias por acompañarnos y formar parte de este momento inolvidable."]
+      }
+    ]
+  },
+  "vestimenta": {
+    "titulo": "Código de vestimenta",
+    "tipo": "Formal",
+    "parrafos": [
+      "Para mantener la armonía de este día tan especial, los colores blanco y verde estarán reservados exclusivamente para los novios.",
+      "Agradecemos de corazón que elijas otros tonos para acompañarnos en nuestra celebración."
+    ]
+  },
+  "regalo": {
+    "titulo": "El mejor regalo",
+    "parrafos": [
+      "Tu presencia en este día tan especial es nuestro mayor regalo.",
+      "Como actualmente vivimos fuera de Ecuador, se nos dificulta transportar regalos físicos. Por eso, si deseas tener un detalle con nosotros, agradeceríamos de corazón una contribución mediante transferencia bancaria.",
+      "Muchas gracias por tu cariño y por acompañarnos en el comienzo de esta nueva etapa."
+    ],
+    "boton": "Ver datos bancarios",
+    "tituloVentana": "Datos para transferencia",
+    "etiquetas": {"titular": "Titular", "banco": "Banco", "tipo": "Tipo de cuenta", "cuenta": "Número de cuenta", "cedula": "Cédula de identidad"},
+    "copiarCuenta": "Copiar número de cuenta",
+    "copiarCedula": "Copiar cédula",
+    "cerrar": "Cerrar",
+    "copiado": "Copiado correctamente.",
+    "errorCopia": "No se pudo copiar. Puedes seleccionar el número y copiarlo manualmente."
+  },
+  "datosBancarios": {
+    "titular": "Emilio Goyes",
+    "banco": "Banco Pichincha",
+    "tipo": "Cuenta de ahorro transaccional",
+    "cuenta": "2215524810",
+    "cedula": "1726672486"
+  },
+  "rsvp": {
+    "urlAppsScript": "",
+    "titulo": "Confirma tu asistencia",
+    "introduccion": "Para ayudarnos a preparar cada detalle de nuestro gran día, te agradeceríamos que confirmaras tu asistencia antes del {fechaLimite}.",
+    "nota": "Es importante que completes el formulario tanto si puedes acompañarnos como si no. Tu respuesta nos ayudará muchísimo con la organización.",
+    "campos": {"nombre": "Nombre", "apellidos": "Apellidos", "telefono": "Número de teléfono", "asistencia": "¿Nos acompañarás?"},
+    "ejemploTelefono": "+593 99 123 4567",
+    "ayudaTelefono": "Incluye el prefijo de tu país, por ejemplo +593 o +351.",
+    "si": "Sí, asistiré.",
+    "no": "No podré asistir.",
+    "boton": "Enviar confirmación",
+    "enviando": "Guardando tu respuesta…",
+    "privacidad": "Los datos proporcionados se utilizarán únicamente para gestionar las confirmaciones de asistencia a nuestra boda.",
+    "cerrado": "El plazo para confirmar tu asistencia ha finalizado. Muchas gracias por tu cariño y comprensión.",
+    "noDisponible": "Las confirmaciones todavía no están disponibles. Por favor, vuelve a intentarlo más adelante.",
+    "error": "No pudimos confirmar que tu respuesta se haya guardado. Revisa tu conexión y vuelve a intentarlo.",
+    "duplicado": "Ya hemos recibido una confirmación con estos datos. Solo se admite una respuesta por persona.",
+    "telefonoInvalido": "Escribe un teléfono con el prefijo internacional, comenzando por +.",
+    "exitoSi": {"titulo": "¡Gracias por confirmar!", "texto": "Nos llena de alegría saber que nos acompañarás. ¡Te esperamos con mucho cariño!"},
+    "exitoNo": {"titulo": "Gracias por responder", "texto": "Aunque nos habría encantado contar con tu presencia, agradecemos mucho que nos lo hayas hecho saber. Te enviamos un abrazo con cariño."}
+  }
+}

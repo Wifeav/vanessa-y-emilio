@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root{--verde:#203A32;--vino:#722F37;--madera:#765440;--marfil:#F7F3EB;--crema:#EDE6DA;--borde:rgba(118,84,64,.28)}
+    *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;padding:3px 5px 8px;background:var(--crema);color:var(--verde);font:17px/1.7 Georgia,"Times New Roman",serif}button,input{font:inherit}label:not(.opcion){display:block;margin-top:23px}label:first-child{margin-top:0}label>span{display:block;margin-bottom:7px}input:not([type=radio]){width:100%;border:1px solid var(--borde);border-radius:1px;min-height:56px;background:var(--marfil);padding:13px 15px;color:var(--verde);font-size:17px}fieldset{border:0;padding:0;margin:25px 0}legend{margin-bottom:10px}.opcion{display:flex;align-items:center;gap:12px;padding:11px 13px;min-height:48px;border:1px solid var(--borde);background:var(--marfil);margin-bottom:10px;cursor:pointer}.opcion span{margin:0}.opcion input{width:19px;height:19px;accent-color:var(--vino);flex:none}.boton{width:100%;display:flex;align-items:center;justify-content:center;min-height:52px;padding:13px 22px;background:var(--vino);border:1px solid var(--vino);border-radius:1px;color:var(--marfil);font-size:16px;letter-spacing:.02em;cursor:pointer}.boton:disabled{opacity:.55;cursor:default}.ayuda,.estado{font-size:14px;line-height:1.6;color:var(--madera);margin:10px 0}.exito,.cerrado{text-align:center;margin:20px 0}.exito h3{font-weight:400;font-size:29px;line-height:1.25;margin:0 0 18px}.exito p,.cerrado{font-size:17px;margin:0}.trampa{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}:focus-visible{outline:2px solid var(--madera);outline-offset:3px}
+  </style>
+</head>
+<body>
+  <form id="formulario">
+    <label><span id="nombre-label"></span><input id="nombre" name="nombre" required maxlength="100" autocomplete="given-name"></label>
+    <label><span id="apellidos-label"></span><input id="apellidos" name="apellidos" required maxlength="100" autocomplete="family-name"></label>
+    <label><span id="telefono-label"></span><input id="telefono" name="telefono" type="tel" inputmode="tel" required maxlength="30" autocomplete="tel" aria-describedby="ayuda"></label>
+    <p id="ayuda" class="ayuda"></p>
+    <fieldset><legend id="pregunta"></legend><label class="opcion"><input type="radio" name="asistencia" value="Sí" required><span id="si-label"></span></label><label class="opcion"><input type="radio" name="asistencia" value="No" required><span id="no-label"></span></label></fieldset>
+    <div class="trampa" aria-hidden="true"><input id="website" name="website" tabindex="-1" autocomplete="off" aria-label="Dejar vacío"></div>
+    <button id="enviar" class="boton" type="submit"></button>
+    <p id="estado" class="estado" role="status" aria-live="polite" hidden></p>
+  </form>
+  <div id="exito" class="exito" role="status" hidden><h3 id="exito-titulo"></h3><p id="exito-texto"></p></div>
+  <p id="cerrado" class="cerrado" hidden></p>
+  <script>
+    'use strict';
+    const D = <?!= datos ?>;
+    const R = D.rsvp, $ = id => document.getElementById(id);
+    let enviando = false, guardado = false, pendiente = null, temporizador;
+    const texto = (id, v) => $(id).textContent = String(v || '');
+    const nuevoId = () => Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join('');
+    function avisar(tipo) {
+      window.top.postMessage({ canal: 'vanessa-emilio-rsvp', token: D.token, tipo: tipo, alto: Math.ceil(document.body.getBoundingClientRect().height) + 3 }, D.origen);
+    }
+    Object.entries(D.colores).forEach(([k, v]) => { if (/^#[0-9a-f]{6}$/i.test(v)) document.documentElement.style.setProperty('--' + k, v); });
+    [['nombre-label', R.campos.nombre], ['apellidos-label', R.campos.apellidos], ['telefono-label', R.campos.telefono], ['pregunta', R.campos.asistencia], ['si-label', R.si], ['no-label', R.no], ['ayuda', R.ayudaTelefono], ['enviar', R.boton], ['cerrado', R.cerrado]].forEach(([k, v]) => texto(k, v));
+    $('telefono').placeholder = R.ejemploTelefono;
+    function cierre() {
+      if (!guardado && (D.cerrado || Date.now() >= Date.parse(D.fechaLimite + 'T00:00:00-05:00') + 86400000)) { $('formulario').hidden = true; $('cerrado').hidden = false; }
+    }
+    function error(mensaje) {
+      enviando = false; $('enviar').disabled = false; texto('enviar', R.boton); texto('estado', mensaje); $('estado').hidden = false; avisar('alto');
+    }
+    $('formulario').addEventListener('submit', async e => {
+      e.preventDefault(); if (enviando || guardado) return; cierre(); if ($('formulario').hidden) return;
+      if (!$('formulario').reportValidity()) return;
+      const datos = { nombre: $('nombre').value.trim().replace(/\s+/g, ' '), apellidos: $('apellidos').value.trim().replace(/\s+/g, ' '), telefono: $('telefono').value.replace(/[\s().-]/g, ''), asistencia: $('formulario').elements.asistencia.value, website: $('website').value };
+      if (!/^\+[1-9]\d{7,14}$/.test(datos.telefono)) return error(R.telefonoInvalido);
+      // Conservar el mismo identificador al reintentar exactamente el mismo envío.
+      const firma = JSON.stringify(datos);
+      if (!pendiente || pendiente.firma !== firma) pendiente = { firma: firma, id: nuevoId() };
+      const intento = pendiente.id; datos.solicitud = intento;
+      enviando = true; $('enviar').disabled = true; texto('enviar', R.enviando); $('estado').hidden = true;
+      if (typeof google === 'undefined' || !google.script || !google.script.run) return error(R.error);
+      clearTimeout(temporizador); temporizador = setTimeout(() => { if (!guardado && pendiente.id === intento) error(R.error); }, 35000);
+      google.script.run.withSuccessHandler(resultado => {
+        if (pendiente.id !== intento || guardado) return;
+        clearTimeout(temporizador);
+        if (!resultado || !resultado.ok) {
+          if (resultado && resultado.codigo === 'CERRADO') { D.cerrado = true; cierre(); avisar('alto'); return; }
+          return error(resultado && resultado.codigo === 'DUPLICADO' ? R.duplicado : resultado && resultado.codigo === 'TELEFONO' ? R.telefonoInvalido : R.error);
+        }
+        guardado = true; enviando = false; $('formulario').hidden = true; $('cerrado').hidden = true;
+        const mensaje = resultado.asistencia === 'Sí' ? R.exitoSi : R.exitoNo;
+        texto('exito-titulo', mensaje.titulo); texto('exito-texto', mensaje.texto); $('exito').hidden = false; avisar('guardado');
+      }).withFailureHandler(() => { if (pendiente.id === intento && !guardado) { clearTimeout(temporizador); error(R.error); } }).guardarConfirmacion(datos);
+    });
+    cierre(); setInterval(cierre, 1000);
+    window.addEventListener('load', () => avisar('listo'));
+    if (typeof ResizeObserver !== 'undefined') new ResizeObserver(() => avisar('alto')).observe(document.body);
+    setTimeout(() => avisar('listo'), 100);
+  </script>
+</body>
+</html>

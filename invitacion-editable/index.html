@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#203A32">
+  <title>Vanessa &amp; Emilio · 17 de julio de 2027</title>
+  <meta name="description" content="Nuestra boda. 17 de julio de 2027, Quinta La Victoria, Ecuador.">
+  <meta property="og:title" content="Vanessa &amp; Emilio · Nuestra boda">
+  <meta property="og:description" content="17 de julio de 2027 · Quinta La Victoria, Ecuador">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="estilos.css">
+  <script src="invitacion.js" defer></script>
+</head>
+<body>
+  <section id="portada" class="portada" aria-labelledby="nombres">
+    <div class="portada-interior">
+      <figure class="marco" id="marco-foto">
+        <img id="foto" alt="Vanessa y Emilio" width="800" height="1000" hidden>
+        <div class="foto-pendiente" id="foto-pendiente" aria-label="Fotografía de Vanessa y Emilio pendiente"></div>
+      </figure>
+      <div class="portada-texto">
+        <h1 id="nombres">Vanessa <span class="amp">&amp;</span> Emilio</h1>
+        <p id="fecha-portada" class="fecha-portada">17 de julio de 2027</p>
+        <button id="abrir" class="boton boton-portada" type="button">Abrir invitación</button>
+        <p id="error-carga" class="error-carga" role="alert" hidden></p>
+      </div>
+    </div>
+  </section>
+  <main id="contenido" hidden>
+    <section id="bienvenida" class="seccion bienvenida" aria-labelledby="titulo-bienvenida">
+      <div class="estrecho">
+        <h2 id="titulo-bienvenida" tabindex="-1">¡Nos casamos!</h2>
+        <div id="parrafos-bienvenida" class="prosa"></div>
+      </div>
+    </section>
+    <section id="fecha" class="seccion seccion-crema" aria-labelledby="titulo-fecha">
+      <div class="estrecho">
+        <p id="fecha-completa" class="etiqueta"></p>
+        <h2 id="titulo-fecha">Cuenta regresiva para nuestro gran día</h2>
+        <div id="cuenta" class="cuenta" aria-label="Cuenta regresiva">
+          <div><span id="dias" class="numero">0</span><span id="unidad-0" class="unidad">Días</span></div>
+          <div><span id="horas" class="numero">00</span><span id="unidad-1" class="unidad">Horas</span></div>
+          <div><span id="minutos" class="numero">00</span><span id="unidad-2" class="unidad">Minutos</span></div>
+          <div><span id="segundos" class="numero">00</span><span id="unidad-3" class="unidad">Segundos</span></div>
+        </div>
+        <p id="cuenta-final" class="cuenta-final" hidden></p>
+        <p id="nota-horario" class="nota-horario"></p>
+        <div class="calendario" role="group" aria-label="Calendario de la boda">
+          <div class="mes"><span id="mes-calendario">Julio</span><span id="anio-calendario">2027</span></div>
+          <div class="dias-semana" aria-hidden="true"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+          <div id="dias-calendario" class="dias-calendario"></div>
+        </div>
+        <p id="nota-calendario" class="nota"></p>
+      </div>
+    </section>
+    <section id="ubicacion" class="seccion seccion-verde" aria-labelledby="nombre-lugar">
+      <div class="estrecho">
+        <p id="titulo-ubicacion" class="etiqueta"></p>
+        <h2 id="nombre-lugar">Quinta La Victoria</h2>
+        <p id="pais-lugar" class="pais">Ecuador</p>
+        <a id="maps" class="boton boton-claro" href="https://maps.app.goo.gl/vtBazL1dYcwwEguR9?g_st=ic" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
+      </div>
+    </section>
+    <section id="cronograma" class="seccion" aria-labelledby="titulo-cronograma">
+      <div class="estrecho"><h2 id="titulo-cronograma">Cronograma del día</h2><ol id="momentos" class="momentos"></ol></div>
+    </section>
+    <section id="vestimenta" class="seccion seccion-crema" aria-labelledby="titulo-vestimenta">
+      <div class="estrecho"><h2 id="titulo-vestimenta">Código de vestimenta</h2><p id="tipo-vestimenta" class="formal">Formal</p><div id="parrafos-vestimenta" class="prosa"></div></div>
+    </section>
+    <section id="regalo" class="seccion" aria-labelledby="titulo-regalo">
+      <div class="estrecho"><h2 id="titulo-regalo">El mejor regalo</h2><div id="parrafos-regalo" class="prosa"></div><button id="banco" class="boton" type="button">Ver datos bancarios</button></div>
+    </section>
+    <section id="rsvp" class="seccion seccion-crema" aria-labelledby="titulo-rsvp">
+      <div class="estrecho">
+        <h2 id="titulo-rsvp">Confirma tu asistencia</h2>
+        <p id="intro-rsvp" class="rsvp-intro"></p><p id="nota-rsvp" class="rsvp-nota"></p>
+        <div id="contenedor-formulario" class="contenedor-formulario">
+          <form id="formulario-pendiente" class="formulario">
+            <label><span id="label-nombre">Nombre</span><input name="nombre" autocomplete="given-name" required maxlength="100" disabled></label>
+            <label><span id="label-apellidos">Apellidos</span><input name="apellidos" autocomplete="family-name" required maxlength="100" disabled></label>
+            <label><span id="label-telefono">Número de teléfono</span><input name="telefono" type="tel" autocomplete="tel" required maxlength="30" disabled aria-describedby="ayuda-telefono"></label>
+            <p id="ayuda-telefono" class="ayuda"></p>
+            <fieldset><legend id="label-asistencia">¿Nos acompañarás?</legend><label class="opcion"><input type="radio" name="asistencia" value="Sí" required disabled><span id="label-si">Sí, asistiré.</span></label><label class="opcion"><input type="radio" name="asistencia" value="No" required disabled><span id="label-no">No podré asistir.</span></label></fieldset>
+            <button id="enviar-pendiente" class="boton" type="submit" disabled>Enviar confirmación</button>
+          </form>
+          <p id="estado-rsvp" class="estado" role="status" aria-live="polite"></p>
+        </div>
+        <p id="rsvp-cerrado" class="cerrado" hidden></p>
+        <p id="privacidad" class="privacidad"></p>
+      </div>
+    </section>
+  </main>
+  <button id="control-musica" class="control-musica" type="button" aria-label="Silenciar música" aria-pressed="true" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12M9 10l10-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="16" cy="16" rx="3" ry="2"/></svg><span id="musica-silenciada" class="linea-silencio" hidden></span></button>
+  <audio id="audio" loop preload="none"></audio>
+  <dialog id="datos-banco" aria-labelledby="titulo-banco">
+    <h2 id="titulo-banco">Datos para transferencia</h2><dl id="lista-banco"></dl>
+    <div class="acciones-banco"><button id="copiar-cuenta" class="boton" type="button">Copiar número de cuenta</button><button id="copiar-cedula" class="boton boton-secundario" type="button">Copiar cédula</button></div>
+    <p id="mensaje-copia" class="estado" role="status" aria-live="polite"></p><button id="cerrar-banco" class="cerrar-banco" type="button">Cerrar</button>
+  </dialog>
+  <p id="aviso-musica" class="aviso-musica" role="status" hidden></p>
+  <noscript><p class="sin-js">Activa JavaScript en tu navegador para abrir la invitación.</p></noscript>
+</body>
+</html>
